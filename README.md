@@ -1,4 +1,4 @@
-# PZEM Reader (Device 0)
+# PZEM Reader
 
 This repository contains a Python-based script to interface with PZEM energy monitoring devices using Modbus TCP. The script automates data recording, handles connection management, and logs data into CSV files.
 
