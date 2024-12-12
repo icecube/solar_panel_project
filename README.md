@@ -85,4 +85,5 @@ Contributions are welcome! Feel free to submit issues or pull requests for featu
 ## Contact
 
 For further information or questions, please contact:
-- Manish Khanal (maintainer)
+- Manish Khanal (manish.khanal@utah.edu)
+- Hayden Soelberg (hwsoelberg@gmail.com)
