@@ -8,7 +8,6 @@ This repository contains a Python-based script to interface with PZEM energy mon
 - Automatically generates and manages CSV files for daily logs.
 - Periodically records voltage, current, and temperature.
 - Handles errors such as device disconnection or communication failure.
-- User-friendly folder and file structure creation.
 
 ## Requirements
 
@@ -36,7 +35,7 @@ This repository contains a Python-based script to interface with PZEM energy mon
 3. Install dependencies:
    ```bash
    pip install pymodbus
-   ```
+   ``` 
 
 ## Configuration
 
@@ -73,14 +72,6 @@ This repository contains a Python-based script to interface with PZEM energy mon
   - Permission issues
   - Sensor disconnection or communication failure
 - Logs `NO RESPONSE` for failed data reads.
-
-## License
-
-This project is open-source and available under the [MIT License](LICENSE).
-
-## Contribution
-
-Contributions are welcome! Feel free to submit issues or pull requests for feature enhancements or bug fixes.
 
 ## Contact
 
