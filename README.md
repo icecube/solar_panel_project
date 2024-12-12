@@ -24,12 +24,12 @@ This repository contains a Python-based script to interface with PZEM energy mon
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/icecube/solar_panel_project.git
    ```
 
 2. Navigate to the repository:
    ```bash
-   cd <repository-folder>
+   cd solar_panel_project
    ```
 
 3. Install dependencies (different in case there of no internet):
