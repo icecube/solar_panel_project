@@ -32,7 +32,7 @@ This repository contains a Python-based script to interface with PZEM energy mon
    cd <repository-folder>
    ```
 
-3. Install dependencies:
+3. Install dependencies (different in case there of no internet):
    ```bash
    pip install pymodbus
    ``` 
