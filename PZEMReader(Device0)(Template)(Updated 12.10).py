@@ -7,6 +7,7 @@ import os, sys
 
 CONST_POLE = "spo"
 CONST_FILETYPE = ".csv"
+CONST_DEVICE_IP = '192.168.28.104'
 CONST_DEVICE_ID = 0
 
 def make_filename(date: date) -> str:
@@ -132,7 +133,7 @@ def record_data(filename: str):
     
 
 
-ser = ModbusTcpClient('192.168.28.104', #Most likely needs to be manually entered for automatic running of program
+ser = ModbusTcpClient(CONST_DEVICE_IP, #Most likely needs to be manually entered for automatic running of program
                       port = 8899)
 
 unit_id = CONST_DEVICE_ID
