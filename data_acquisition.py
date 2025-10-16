@@ -3,12 +3,14 @@ from datetime import datetime, date
 import threading
 import time
 import os, sys
+import zipfile
 
 username = os.environ.get("USERNAME")
 
 CONST_POLE = "spo"
 CONST_FILETYPE = ".csv"
 data_frequency = 60 # The number here defines the frequency of data collection
+
 def make_filename(date: date) -> str:
 
     username = os.getlogin()
@@ -147,19 +149,29 @@ if connect_str := ser.connect():
 
     try:
         while True:
-            if date != datetime.now().date():
+            
+            new_date = datetime.now().date()
+            if date.month != new_date.month or date.year != new_date.year:
                 flag.set()
                 time.sleep(2)
-
-                #Reset
-                date = datetime.now().date()
+    
+                # Zip the previous month's folder before resetting
+                zip_month_folder(date.year, date.month)
+    
+                # Reset
+                date = new_date
                 filename = make_filename(date)
                 flag.clear()
                 recording_thread = threading.Thread(target=record_data, args=(filename,))
                 recording_thread.start()
+
                 
     except KeyboardInterrupt as e:
         flag.set()
 
     recording_thread.join()
     print("Program exiting...")
+
+
+
+
