@@ -132,7 +132,27 @@ size = len(unit_arr)
 if size == 0:
     print("No devices detected. Exiting.")
     sys.exit()
-
+def zip_month_folder(year: int, month: int):
+    username = os.getlogin()
+    folder_name = f"{str(year)[-2:]}_{month}"
+    folder_path = f"C:/Users/{username}/Documents/Icecube/{folder_name}/"
+    zip_filename = os.path.join(folder_path, f"{folder_name}.zip")
+    
+    if not os.path.exists(folder_path):
+        print(f"Folder {folder_path} does not exist, skipping zipping.")
+        return
+    
+    print(f"Zipping folder {folder_path} into {zip_filename}...")
+    
+    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        for root, _, files in os.walk(folder_path):
+            for file in files:
+                if file.endswith('.csv'):
+                    file_path = os.path.join(root, file)
+                    arcname = os.path.relpath(file_path, folder_path)
+                    zipf.write(file_path, arcname)
+                    
+    print(f"Zipping complete.")
 
 if connect_str := ser.connect():
 
@@ -171,6 +191,7 @@ if connect_str := ser.connect():
 
     recording_thread.join()
     print("Program exiting...")
+
 
 
 
