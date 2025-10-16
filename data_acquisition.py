@@ -169,21 +169,25 @@ if connect_str := ser.connect():
 
     try:
         while True:
-            
             new_date = datetime.now().date()
-            if date.month != new_date.month or date.year != new_date.year:
+            if date != new_date:
                 flag.set()
                 time.sleep(2)
-    
-                # Zip the previous month's folder before resetting
+
+                # Zip the previous month's folder before resetting (optional)
                 zip_month_folder(date.year, date.month)
-    
+
                 # Reset
                 date = new_date
                 filename = make_filename(date)
                 flag.clear()
                 recording_thread = threading.Thread(target=record_data, args=(filename,))
                 recording_thread.start()
+
+            time.sleep(1)  # Add a small sleep to avoid busy looping
+    except KeyboardInterrupt:
+        flag.set()
+
 
                 
     except KeyboardInterrupt as e:
