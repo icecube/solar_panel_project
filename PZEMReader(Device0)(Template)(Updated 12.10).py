@@ -76,10 +76,10 @@ def record_data(filename: str):
                         registers = ser.read_input_registers(0x00,2,
                                                          slave = unit_id)
                     
-                        volt = registers.registers[0] / 100
-                        curr = registers.registers[1] / 100
-                        temp = ser.read_input_registers(0x00,1,
-                                                         slave = 1).registers[0] / 10
+                        volt = 0.0 #registers.registers[0] / 100
+                        curr = 0.0 #registers.registers[1] / 100
+                        temp = 0.0 #ser.read_input_registers(0x00,1,
+                                                        # slave = 1).registers[0] / 10
 
                         f.write("{},{},{},"
                                 "{},{},{},OK\n".format(datetime.today().date(),
@@ -133,51 +133,51 @@ def record_data(filename: str):
     
 
 
-ser = ModbusTcpClient(CONST_DEVICE_IP, #Most likely needs to be manually entered for automatic running of program
-                      port = 8899)
+#ser = ModbusTcpClient(CONST_DEVICE_IP, #Most likely needs to be manually entered for automatic running of program
+#                     port = 8899)
 
 unit_id = CONST_DEVICE_ID
 size = 1
 
-if connect_str := ser.connect():
+#if connect_str := ser.connect():
 
-    print("Connection found" if ser.is_socket_open() else "No connection found")
+ #   print("Connection found" if ser.is_socket_open() else "No connection found")
 
-    current_time = time.time()
-    date = datetime.now().date()
-    filename = make_filename(date)
-
-
-    flag = threading.Event()
-    recording_thread = threading.Thread(target=record_data, args=(filename,))
-    recording_thread.start()
+  #  current_time = time.time()
+   # date = datetime.now().date()
+    #filename = make_filename(date)
 
 
-    try:
-        while True:
-            if date != datetime.now().date():
-                flag.set()
-                time.sleep(2)
+    #flag = threading.Event()
+    #recording_thread = threading.Thread(target=record_data, args=(filename,))
+    #recording_thread.start()
+
+
+    #try:
+     #   while True:
+      #      if date != datetime.now().date():
+       #         flag.set()
+        #        time.sleep(2)
 
                 #Reset
-                date = datetime.now().date()
-                filename = make_filename(date)
-                flag.clear()
-                recording_thread = threading.Thread(target=record_data, args=(filename,))
-                recording_thread.start()
+         #       date = datetime.now().date()
+          #      filename = make_filename(date)
+           #     flag.clear()
+            #    recording_thread = threading.Thread(target=record_data, args=(filename,))
+             #   recording_thread.start()
                 
-    except KeyboardInterrupt as e:
-        flag.set()
+    #except KeyboardInterrupt as e:
+     #   flag.set()
 
-    recording_thread.join()
-    print("Program exiting...")
+    #recording_thread.join()
+    #print("Program exiting...")
 
-    sys.exit()
+    #sys.exit()
     
-else:
-    print("No connection found. Program exiting...")
-
-    sys.exit()
+#else:
+ #   print("No connection found. Program exiting...")
+#
+ #   sys.exit()
 
 
 
